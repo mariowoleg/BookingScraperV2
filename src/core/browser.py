@@ -1,19 +1,12 @@
 
 from playwright.async_api import async_playwright, Browser, BrowserContext,ViewportSize
 from typing import Tuple
-
-DEFAULT_USER_AGENT = (
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-    "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/122.0.0.0 Safari/537.36"
-)
-
-view_port_size: ViewportSize = {"width": 1366, "height": 768}
+from src.config.settings import *
 
 class BrowserFactory:
 
-    def __init__(self, headless: bool = True, user_agent: str = DEFAULT_USER_AGENT,
-                 navigation_timeout_ms: int = 60000):
+    def __init__(self, headless: bool = HEADLESS, user_agent: str = DEFAULT_USER_AGENT,
+                 navigation_timeout_ms: int = NAVIGATION_TIMEOUT_MS):
 
         self.headless = headless
         self.user_agent = user_agent
@@ -35,7 +28,7 @@ class BrowserFactory:
 
         self._context = await self._browser.new_context(
             user_agent=self.user_agent,
-            viewport={"width": 1366, "height": 768},
+            viewport={"width": VIEWPORT_WIDTH, "height": VIEWPORT_HEIGHT},
             locale="es-ES"
         )
 
