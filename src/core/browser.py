@@ -38,6 +38,7 @@ class BrowserFactory:
         return self._browser, self._context
 
 
+
     async def new_page(self):
         if not self._context:
             raise RuntimeError("Browser context is not initialized. Call start() first")
